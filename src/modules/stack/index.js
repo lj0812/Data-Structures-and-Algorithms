@@ -1,22 +1,24 @@
+let _stack = Symbol('stack')
+
 class Stack {
   constructor () {
-    this._stack = []
+    this[_stack] = []
   }
 
   push (element) {
-    this._stack.push(element)
+    this[_stack].push(element)
   }
 
   pop () {
-    return this._stack.pop()
+    return this[_stack].pop()
   }
 
   peek () {
-    return this._stack[this.size - 1]
+    return this[_stack][this.size - 1]
   }
 
   clear () {
-    this._stack = []
+    this[_stack] = []
     return true
   }
 
@@ -25,7 +27,7 @@ class Stack {
   }
 
   get size () {
-    return this._stack.length
+    return this[_stack].length
   }
 }
 
