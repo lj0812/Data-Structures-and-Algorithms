@@ -1,0 +1,23 @@
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+}
+
+canvas {
+  display: block;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+input,
+audio,
+button {
+  outline: none;
+  border-width: 0;
+}
