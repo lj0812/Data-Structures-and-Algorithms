@@ -1,3 +1,5 @@
+import { swapArrayValue } from '../utils'
+
 /**
  * 冒泡排序
  * @param {Array} numberArray 待排序的数组
@@ -16,7 +18,7 @@ function bubbleSort (numberArray, orderBy = 'asc') {
         (orderByAsc && currNum > nextNum) ||
         (!orderByAsc && currNum < nextNum)
       ) {
-        [numberArray[point], numberArray[point + 1]] = [nextNum, currNum]
+        swapArrayValue(numberArray, point, point + 1)
       }
     }
   }
