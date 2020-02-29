@@ -41,14 +41,35 @@ class Polygon {
     }, 0)
   }
 
-  averageDivide (count) {
+  averageDivide (count, startPoint = this.nodes[0]) {
     if (count <= 0) {
       throw Error('均分段数不能小于1')
     }
 
     const averageLength = this.perimeter / count
 
-    console.log('averageDivide', averageLength)
+    let divideNodes = []
+
+    for (let i = 0; i < count - 1; i++) {
+      let accLength = averageLength * (i + 1)
+
+      let prevPointIndex = this.dpoints.findIndex((item, index, arr) => {
+        return accLength >= item && accLength < arr[index + 1]
+      })
+
+      const prevNode = this.nodes[prevPointIndex]
+      const nextNode = this.nodes[prevPointIndex + 1] ? this.nodes[prevPointIndex + 1] : this.nodes[0]
+
+      let prevPointGap = accLength - this.dpoints[prevPointIndex]
+
+      let deg = Math.atan((nextNode.y - prevNode.y) / (nextNode.x - prevNode.x))
+      let x = prevPointGap * Math.cos(deg) + prevNode.x
+      let y = prevPointGap * Math.cos(deg) + prevNode.y
+
+      divideNodes.push(Node.create(x, y))
+    }
+
+    return [ startPoint, ...divideNodes ]
   }
 }
 
@@ -63,4 +84,4 @@ const points = [
 
 const polygon = new Polygon(points)
 
-console.log(polygon, polygon.perimeter, polygon.averageDivide(3), polygon.dpoints)
+console.log('6等分点', polygon.averageDivide(6))
